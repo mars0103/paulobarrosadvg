@@ -594,10 +594,7 @@ ul, ol { list-style: none; }
 .chess-king-img {
   width: 100%;
   height: auto;
-  /* força branco com brilho dourado independente da cor original do PNG */
-  filter: brightness(0) invert(1)
-          drop-shadow(0 20px 60px rgba(200,168,75,0.7))
-          drop-shadow(0 0 30px rgba(200,168,75,0.35));
+  filter: drop-shadow(0 16px 48px rgba(200,168,75,0.3)) drop-shadow(0 0 24px rgba(200,168,75,0.12));
   animation: chessFloat 3.8s ease-in-out infinite;
 }
 @keyframes chessFloat {
