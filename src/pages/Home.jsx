@@ -42,7 +42,7 @@ export default function Home() {
 
       // Chess king: visible from start, grows + moves as hero scrolls away
       gsap.to(chessRef.current, {
-        y: '30vh', x: '-16vw', scale: 3.4, rotation: -8, ease: 'none',
+        y: '22vh', x: '18vw', scale: 3.4, rotation: 6, ease: 'none',
         scrollTrigger: {
           trigger: '.hero',
           start: 'top top',
