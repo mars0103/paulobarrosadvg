@@ -139,7 +139,6 @@ export default function Escritorio() {
           }}>♚</span>
         </div>
         <div className="page-banner-content">
-          <p className="sec-label on-dark page-enter">01 — O Escritório</p>
           <h1 className="heading-display page-enter">
             Advocacia como{' '}
             <em className="gold-italic">parceria</em>{' '}
@@ -157,7 +156,7 @@ export default function Escritorio() {
         </div>
       </div>
 
-      <Marquee />
+      <Marquee theme="light" />
 
       {/* ─── PROPOSTA — large asymmetric text ─── */}
       <section className="section on-dark escritorio-proposta" style={{ paddingBottom: '80px' }}>
