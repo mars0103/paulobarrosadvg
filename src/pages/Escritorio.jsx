@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Marquee from '../components/Marquee'
+import DarkVeil from '../components/DarkVeil'
 import { stats } from '../data/content'
 
 export default function Escritorio() {
@@ -57,20 +58,6 @@ export default function Escritorio() {
           })
           gsap.from('.process-row', {
             y: 20, opacity: 0, stagger: 0.07, duration: 0.7, ease: 'power2.out', delay: 0.2,
-          })
-        },
-        once: true,
-      })
-
-      // Fundador
-      ScrollTrigger.create({
-        trigger: '.founder-split',
-        start: 'top 75%',
-        onEnter: () => {
-          const photo = document.querySelector('.founder-photo')
-          if (photo) photo.classList.add('revealed')
-          gsap.from('.founder-split .anim-up', {
-            y: 30, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power2.out',
           })
         },
         once: true,
@@ -136,6 +123,14 @@ export default function Escritorio() {
       {/* ─── BANNER ─── */}
       <div className="page-banner on-dark">
         <div className="page-banner-bg">
+          <DarkVeil
+            hueShift={218}
+            noiseIntensity={0.02}
+            scanlineIntensity={0}
+            speed={0.9}
+            scanlineFrequency={0}
+            warpAmount={0.15}
+          />
           <div className="page-banner-glow" />
           <span style={{
             position: 'absolute', right: '5%', bottom: '10%',
@@ -217,10 +212,10 @@ export default function Escritorio() {
       </div>
 
       {/* ─── PROCESSO — numbered vertical list ─── */}
-      <section className="section on-dark escritorio-process" style={{ paddingTop: '100px' }}>
+      <section className="section escritorio-process" style={{ paddingTop: '100px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '0' }}>
           <div>
-            <p className="sec-label on-dark anim-up">Nossa abordagem</p>
+            <p className="sec-label anim-up">Nossa abordagem</p>
             <h2 className="heading-xl anim-up">
               Como <em className="gold-italic">trabalhamos.</em>
             </h2>
@@ -240,37 +235,6 @@ export default function Escritorio() {
           ))}
         </div>
       </section>
-
-      {/* ─── FUNDADOR — dark full bleed split ─── */}
-      <div className="founder-split">
-        <div className="founder-panel">
-          <p className="sec-label on-dark anim-up" style={{ marginBottom: '32px' }}>Fundador</p>
-          <h2 className="founder-name anim-up">Paulo<br />Barros</h2>
-          <p className="founder-role anim-up">Advogado Empresarial · OAB/GO XXXXX</p>
-          <p className="founder-bio anim-up">
-            Advogado com atuação exclusiva em direito empresarial. Combina rigor técnico
-            com visão pragmática orientada à realidade do empresário. Ao longo de mais de
-            quinze anos, construiu trajetória em operações complexas de reestruturação,
-            conflitos societários e proteção patrimonial.
-          </p>
-          <p className="founder-bio anim-up">
-            Sua abordagem parte de uma premissa central: o advogado empresarial não é um
-            resolvedor de problemas — é um gerador de segurança para quem decide.
-          </p>
-          <div className="founder-creds anim-up">
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Bacharel em Direito</span></div>
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Pós-graduação em Direito Empresarial</span></div>
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Comissão de Direito Empresarial — OAB/GO</span></div>
-          </div>
-        </div>
-        <div className="founder-photo img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80"
-            alt="Paulo Barros"
-          />
-          <div className="founder-photo-overlay" />
-        </div>
-      </div>
 
       {/* ─── CTA ─── */}
       <section className="cta-section escritorio-cta">

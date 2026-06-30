@@ -51,9 +51,10 @@ export default function StickyAreasCards() {
           if (i < active) {
             gsap.set(card, { yPercent: -250, rotationX: 35 })
           } else if (i === active) {
+            const isLast = active === total - 1
             gsap.set(card, {
-              yPercent: gsap.utils.interpolate(-50, -200, seg),
-              rotationX: gsap.utils.interpolate(0, 35, seg),
+              yPercent: isLast ? -50 : gsap.utils.interpolate(-50, -200, seg),
+              rotationX: isLast ? 0 : gsap.utils.interpolate(0, 35, seg),
               scale: 1,
             })
           } else {

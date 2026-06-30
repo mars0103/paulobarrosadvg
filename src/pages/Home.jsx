@@ -155,6 +155,10 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="hero-video-panel">
+          <video src="/videohero.mp4" autoPlay muted loop playsInline />
+        </div>
+
         <div ref={scrollIndRef} className="hero-scroll" style={{ opacity: 0 }}>Scroll</div>
         <div ref={badgeRef} className="hero-badge" style={{ opacity: 0 }}>OAB/GO · Desde 2010</div>
         <span className="float-chess" style={{ '--size': '80px', '--opacity': '0.03', '--dur': '9s', top: '18%', right: '8%' }}>♚</span>
