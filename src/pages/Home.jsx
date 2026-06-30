@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Marquee from '../components/Marquee'
+import LogoMarquee from '../components/LogoMarquee'
 import StickyAreasCards from '../components/StickyAreasCards'
 import DarkVeil from '../components/DarkVeil'
 import { blogPosts, stats } from '../data/content'
@@ -16,6 +16,7 @@ export default function Home() {
   const tagRef = useRef()
   const scrollIndRef = useRef()
   const badgeRef = useRef()
+  const chessRef = useRef()
 
   useEffect(() => {
     const animateCounters = (scope) => {
@@ -37,6 +38,31 @@ export default function Home() {
         .to(subRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.3')
         .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
         .to([scrollIndRef.current, badgeRef.current], { opacity: 1, duration: 0.8 }, '-=0.1')
+
+      // Chess king: fade in, scroll-animate down to statement section
+      if (chessRef.current) {
+        gsap.to(chessRef.current, { opacity: 1, duration: 1.2, delay: 1.6 })
+
+        gsap.to(chessRef.current, {
+          y: '30vh', x: '-4vw', scale: 3.4, rotation: -9, ease: 'none',
+          scrollTrigger: {
+            trigger: '.home-statement',
+            start: 'top 95%',
+            end: 'center 50%',
+            scrub: 2,
+          },
+        })
+
+        gsap.to(chessRef.current, {
+          opacity: 0, ease: 'none',
+          scrollTrigger: {
+            trigger: '.home-statement',
+            start: 'bottom 60%',
+            end: 'bottom 15%',
+            scrub: 1,
+          },
+        })
+      }
 
       // Statement section
       ScrollTrigger.create({
@@ -165,8 +191,8 @@ export default function Home() {
         <span className="float-chess" style={{ '--size': '56px', '--opacity': '0.025', '--dur': '7s', '--delay': '-3s', bottom: '22%', right: '24%' }}>♛</span>
       </section>
 
-      {/* ─── MARQUEE ─── */}
-      <Marquee theme="light" />
+      {/* ─── LOGO MARQUEE ─── */}
+      <LogoMarquee />
 
       {/* ─── STATEMENT / MANIFESTO ─── */}
       <section className="statement-section home-statement">
@@ -295,6 +321,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* ─── CHESS KING ─── */}
+      <div ref={chessRef} className="chess-king">
+        <img src="/xadrez/rei.png" className="chess-king-img" alt="" aria-hidden />
+      </div>
     </main>
   )
 }
