@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Marquee from '../components/Marquee'
 import StickyAreasCards from '../components/StickyAreasCards'
+import DarkVeil from '../components/DarkVeil'
 import { blogPosts, stats } from '../data/content'
 
 export default function Home() {
@@ -111,10 +112,13 @@ export default function Home() {
       {/* ─── HERO ─── */}
       <section className="hero">
         <div className="hero-bg">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
-            alt=""
-            aria-hidden
+          <DarkVeil
+            hueShift={218}
+            noiseIntensity={0.02}
+            scanlineIntensity={0}
+            speed={0.4}
+            scanlineFrequency={0}
+            warpAmount={0.15}
           />
         </div>
         <div className="hero-overlay" />
