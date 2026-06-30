@@ -243,11 +243,7 @@ ul, ol { list-style: none; }
   margin-bottom: 22px;
 }
 .sec-label::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-  flex-shrink: 0;
+  display: none;
 }
 .on-dark .sec-label { color: rgba(200, 168, 75, 0.7); }
 .on-light .sec-label { color: var(--slate); }
@@ -1795,8 +1791,8 @@ ul, ol { list-style: none; }
   width: 100%;
   padding: 160px var(--site-pad) 100px;
   overflow: hidden;
-  background: var(--black);
-  border-bottom: 1px solid rgba(200,168,75,0.06);
+  background: #120a00;
+  border-bottom: none;
 }
 .page-banner-bg {
   position: absolute;
@@ -1879,9 +1875,7 @@ ul, ol { list-style: none; }
   border: 0;
 }
 .gold-line {
-  width: 48px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--gold), transparent);
+  display: none;
 }
 
 /* ===== PAGE TRANSITIONS ===== */
