@@ -136,10 +136,9 @@ ul, ol { list-style: none; }
 }
 .navbar-link {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 0.2px;
   color: rgba(255,255,255,0.35);
   transition: color 0.3s;
   position: relative;
