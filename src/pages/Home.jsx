@@ -14,6 +14,7 @@ export default function Home() {
   const tagRef = useRef()
   const scrollIndRef = useRef()
   const badgeRef = useRef()
+  const stickyAreasRef = useRef()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -57,19 +58,64 @@ export default function Home() {
         once: true,
       })
 
-      // Areas list
+      // Sticky areas header
       ScrollTrigger.create({
-        trigger: '.home-areas',
-        start: 'top 75%',
+        trigger: '.sticky-areas-header',
+        start: 'top 78%',
         onEnter: () => {
-          gsap.from('.home-areas .anim-up', {
-            y: 24, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power2.out',
-          })
-          gsap.from('.area-row', {
-            y: 20, opacity: 0, stagger: 0.06, duration: 0.7, ease: 'power2.out', delay: 0.2,
+          gsap.from('.sticky-areas-header .anim-up', {
+            y: 24, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power2.out',
           })
         },
         once: true,
+      })
+
+      // Sticky cards scroll
+      const stickyCards = gsap.utils.toArray('.sticky-area-card')
+      const totalCards = stickyCards.length
+      const segSize = 1 / totalCards
+      const cardYOffset = 4
+      const cardScaleStep = 0.05
+
+      stickyCards.forEach((card, i) => {
+        gsap.set(card, {
+          xPercent: -50,
+          yPercent: -50 + i * cardYOffset,
+          scale: 1 - i * cardScaleStep,
+        })
+      })
+
+      ScrollTrigger.create({
+        trigger: stickyAreasRef.current,
+        start: 'top top',
+        end: `+=${window.innerHeight * 12}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress
+          const activeIndex = Math.min(Math.floor(progress / segSize), totalCards - 1)
+          const segProgress = (progress - activeIndex * segSize) / segSize
+
+          stickyCards.forEach((card, i) => {
+            if (i < activeIndex) {
+              gsap.set(card, { yPercent: -250, rotationX: 35 })
+            } else if (i === activeIndex) {
+              gsap.set(card, {
+                yPercent: gsap.utils.interpolate(-50, -200, segProgress),
+                rotationX: gsap.utils.interpolate(0, 35, segProgress),
+                scale: 1,
+              })
+            } else {
+              const behind = i - activeIndex
+              gsap.set(card, {
+                yPercent: -50 + (behind - segProgress) * cardYOffset,
+                rotationX: 0,
+                scale: 1 - (behind - segProgress) * cardScaleStep,
+              })
+            }
+          })
+        },
       })
 
       // Founder section
@@ -116,6 +162,15 @@ export default function Home() {
 
     return () => ctx.revert()
   }, [])
+
+  const areaImages = [
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80',
+  ]
 
   const heroWords = ['Advocacia', 'que', 'move', 'o', 'negócio.']
   const heroHighlight = [false, false, true, false, false]
@@ -210,32 +265,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── AREAS — editorial numbered list ─── */}
-      <section className="section on-light home-areas">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <div>
-            <p className="sec-label on-light anim-up">02 — Áreas de Atuação</p>
-            <h2 className="heading-xl anim-up">
-              Onde <em className="gold-italic">atuamos.</em>
-            </h2>
-          </div>
+      {/* ─── AREAS — sticky cards scroll ─── */}
+      <div className="sticky-areas-header">
+        <p className="sec-label on-light anim-up">02 — Áreas de Atuação</p>
+        <div className="sticky-areas-header-row">
+          <h2 className="heading-xl anim-up">
+            Onde <em className="gold-italic">atuamos.</em>
+          </h2>
           <Link to="/areas" className="btn btn-dark anim-up">
             <span>Ver todas</span>
           </Link>
         </div>
+      </div>
 
-        <div className="areas-list">
-          {areas.map((area, i) => (
-            <Link to="/areas" key={area.id} className="area-row" style={{ textDecoration: 'none' }}>
-              <span className="area-row-num">0{i + 1}</span>
-              <span className="area-row-icon">{area.icon}</span>
-              <span className="area-row-title">{area.title}</span>
-              <span className="area-row-desc">{area.short}</span>
-              <span className="area-row-arrow">→</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <div ref={stickyAreasRef} className="sticky-areas-wrap">
+        {areas.map((area, i) => (
+          <div key={area.id} className="sticky-area-card">
+            <div className="sticky-area-card__col">
+              <p className="sticky-area-card__eyebrow">0{i + 1} — {area.title.split(' ')[0]}</p>
+              <div>
+                <h2 className="sticky-area-card__title">{area.title}</h2>
+                <p className="sticky-area-card__desc">{area.short}</p>
+              </div>
+              <Link to="/areas" className="sticky-area-card__link">
+                Saiba mais
+                <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
+                  <path d="M1 4H13M13 4L10 1M13 4L10 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
+              </Link>
+            </div>
+            <div className="sticky-area-card__img-col">
+              <img src={areaImages[i]} alt={area.title} loading="lazy" />
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* ─── STATS BANNER ─── */}
       <div className="stats-banner home-stats-banner">
