@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -317,10 +318,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* ─── CHESS KING ─── */}
-      <div ref={chessRef} className="chess-king">
-        <img src="/xadrez/rei.png" className="chess-king-img" alt="" aria-hidden />
-      </div>
     </main>
+
+      {createPortal(
+        <div ref={chessRef} className="chess-king">
+          <img src="/xadrez/rei.png" className="chess-king-img" alt="" aria-hidden />
+        </div>,
+        document.body
+      )}
   )
 }

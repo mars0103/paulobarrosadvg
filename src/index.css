@@ -583,7 +583,7 @@ ul, ol { list-style: none; }
 /* ===== CHESS KING ===== */
 .chess-king {
   position: fixed;
-  z-index: 60;
+  z-index: 9999;
   pointer-events: none;
   left: 52%;
   top: 26%;
@@ -594,7 +594,10 @@ ul, ol { list-style: none; }
 .chess-king-img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 48px rgba(200,168,75,0.3)) drop-shadow(0 0 24px rgba(200,168,75,0.12));
+  /* força branco com brilho dourado independente da cor original do PNG */
+  filter: brightness(0) invert(1)
+          drop-shadow(0 20px 60px rgba(200,168,75,0.7))
+          drop-shadow(0 0 30px rgba(200,168,75,0.35));
   animation: chessFloat 3.8s ease-in-out infinite;
 }
 @keyframes chessFloat {
