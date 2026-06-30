@@ -585,11 +585,11 @@ ul, ol { list-style: none; }
   position: fixed;
   z-index: 60;
   pointer-events: none;
-  left: 44%;
-  top: 20%;
-  width: 150px;
-  opacity: 0;
-  transform-origin: bottom center;
+  left: 52%;
+  top: 26%;
+  width: 160px;
+  opacity: 0.88;
+  transform-origin: center bottom;
 }
 .chess-king-img {
   width: 100%;

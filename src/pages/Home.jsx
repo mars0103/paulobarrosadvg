@@ -39,30 +39,26 @@ export default function Home() {
         .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
         .to([scrollIndRef.current, badgeRef.current], { opacity: 1, duration: 0.8 }, '-=0.1')
 
-      // Chess king: fade in, scroll-animate down to statement section
-      if (chessRef.current) {
-        gsap.to(chessRef.current, { opacity: 1, duration: 1.2, delay: 1.6 })
+      // Chess king: visible from start, grows + moves as hero scrolls away
+      gsap.to(chessRef.current, {
+        y: '30vh', x: '-16vw', scale: 3.4, rotation: -8, ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: '+=140%',
+          scrub: 1.5,
+        },
+      })
 
-        gsap.to(chessRef.current, {
-          y: '30vh', x: '-4vw', scale: 3.4, rotation: -9, ease: 'none',
-          scrollTrigger: {
-            trigger: '.home-statement',
-            start: 'top 95%',
-            end: 'center 50%',
-            scrub: 2,
-          },
-        })
-
-        gsap.to(chessRef.current, {
-          opacity: 0, ease: 'none',
-          scrollTrigger: {
-            trigger: '.home-statement',
-            start: 'bottom 60%',
-            end: 'bottom 15%',
-            scrub: 1,
-          },
-        })
-      }
+      gsap.to(chessRef.current, {
+        opacity: 0, ease: 'none',
+        scrollTrigger: {
+          trigger: '.home-statement',
+          start: 'bottom 65%',
+          end: 'bottom 15%',
+          scrub: 1,
+        },
+      })
 
       // Statement section
       ScrollTrigger.create({
