@@ -122,6 +122,7 @@ export default function Home() {
   const heroHighlight = [false, false, true, false, false]
 
   return (
+    <>
     <main ref={heroRef}>
       {/* ─── HERO ─── */}
       <section className="hero">
@@ -319,12 +320,12 @@ export default function Home() {
         </div>
       </section>
     </main>
-
-      {createPortal(
-        <div ref={chessRef} className="chess-king">
-          <img src="/xadrez/rei.png" className="chess-king-img" alt="" aria-hidden />
-        </div>,
-        document.body
-      )}
+    {createPortal(
+      <div ref={chessRef} className="chess-king">
+        <img src="/xadrez/rei.png" className="chess-king-img" alt="" aria-hidden />
+      </div>,
+      document.body
+    )}
+    </>
   )
 }
