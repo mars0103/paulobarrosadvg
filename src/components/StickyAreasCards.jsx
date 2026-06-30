@@ -4,6 +4,8 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { areas } from '../data/content'
 
+const cardVariants = ['black', 'beige', 'white']
+
 const areaImages = [
   'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80',
@@ -88,11 +90,15 @@ export default function StickyAreasCards() {
         {/* CSS sticky keeps this in viewport during scroll */}
         <div ref={wrapRef} className="sticky-areas-wrap">
           {areas.map((area, i) => (
-            <div key={area.id} className="sticky-area-card">
+            <div key={area.id} className={`sticky-area-card sticky-area-card--${cardVariants[i % cardVariants.length]}`}>
               <div className="sticky-area-card__col">
                 <p className="sticky-area-card__eyebrow">0{i + 1} — {area.title.split(' ')[0]}</p>
                 <div>
-                  <h2 className="sticky-area-card__title">{area.title}</h2>
+                  <h2 className="sticky-area-card__title">
+                    {area.title.split(' ').map((word, wi) => (
+                      <span key={wi} className="sticky-area-card__title-word">{word}</span>
+                    ))}
+                  </h2>
                   <p className="sticky-area-card__desc">{area.short}</p>
                 </div>
                 <Link to="/areas" className="sticky-area-card__link">

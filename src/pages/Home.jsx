@@ -18,6 +18,17 @@ export default function Home() {
   const badgeRef = useRef()
 
   useEffect(() => {
+    const animateCounters = (scope) => {
+      scope.querySelectorAll('.stat-counter').forEach(el => {
+        const target = parseInt(el.dataset.target)
+        if (isNaN(target)) return
+        gsap.to({ val: 0 }, {
+          val: target, duration: 2.2, ease: 'power2.out',
+          onUpdate() { el.textContent = Math.round(this.targets()[0].val) },
+        })
+      })
+    }
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.1 })
       tl.to(tagRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
@@ -31,10 +42,11 @@ export default function Home() {
       ScrollTrigger.create({
         trigger: '.home-statement',
         start: 'top 75%',
-        onEnter: () => {
+        onEnter: (self) => {
           gsap.from('.home-statement .anim-st', {
             y: 40, opacity: 0, stagger: 0.18, duration: 1, ease: 'power3.out',
           })
+          animateCounters(self.trigger)
         },
         once: true,
       })
@@ -43,32 +55,11 @@ export default function Home() {
       ScrollTrigger.create({
         trigger: '.home-stats-banner',
         start: 'top 80%',
-        onEnter: () => {
+        onEnter: (self) => {
           gsap.from('.home-stats-banner .stats-banner-item', {
             y: 24, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power2.out',
           })
-          document.querySelectorAll('.stat-counter').forEach(el => {
-            const target = parseInt(el.dataset.target)
-            if (isNaN(target)) return
-            gsap.to({ val: 0 }, {
-              val: target, duration: 2.2, ease: 'power2.out',
-              onUpdate() { el.textContent = Math.round(this.targets()[0].val) },
-            })
-          })
-        },
-        once: true,
-      })
-
-      // Founder section
-      ScrollTrigger.create({
-        trigger: '.founder-split',
-        start: 'top 75%',
-        onEnter: () => {
-          const photo = document.querySelector('.founder-photo')
-          if (photo) photo.classList.add('revealed')
-          gsap.from('.founder-split .anim-up', {
-            y: 30, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power2.out',
-          })
+          animateCounters(self.trigger)
         },
         once: true,
       })
@@ -116,10 +107,17 @@ export default function Home() {
             hueShift={218}
             noiseIntensity={0.02}
             scanlineIntensity={0}
-            speed={0.4}
+            speed={0.9}
             scanlineFrequency={0}
             warpAmount={0.15}
           />
+          <div className="hero-bg-photo">
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
+              alt=""
+              aria-hidden
+            />
+          </div>
         </div>
         <div className="hero-overlay" />
         <div className="hero-overlay-left" />
@@ -164,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* ─── MARQUEE ─── */}
-      <Marquee />
+      <Marquee theme="light" />
 
       {/* ─── STATEMENT / MANIFESTO ─── */}
       <section className="statement-section home-statement">
@@ -220,41 +218,11 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ─── FUNDADOR — full bleed dark split ─── */}
-      <div className="founder-split">
-        <div className="founder-panel">
-          <p className="sec-label on-dark anim-up" style={{ marginBottom: '32px' }}>03 — Fundador</p>
-          <h2 className="founder-name anim-up">Paulo<br />Barros</h2>
-          <p className="founder-role anim-up">Advogado Empresarial · OAB/GO XXXXX</p>
-          <p className="founder-bio anim-up">
-            Advogado com atuação exclusiva em direito empresarial. Combina rigor técnico
-            com visão pragmática orientada à realidade do empresário. Mais de quinze anos
-            de atuação em operações complexas de reestruturação, conflitos societários e
-            proteção patrimonial.
-          </p>
-          <div className="founder-creds anim-up">
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Bacharel em Direito</span></div>
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Pós-graduação em Direito Empresarial</span></div>
-            <div className="founder-cred"><div className="founder-cred-dot" /><span>Comissão de Direito Empresarial — OAB/GO</span></div>
-          </div>
-          <Link to="/escritorio" className="btn btn-ghost anim-up">
-            <span>Conheça a trajetória</span>
-          </Link>
-        </div>
-        <div className="founder-photo img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80"
-            alt="Paulo Barros, Advogado"
-          />
-          <div className="founder-photo-overlay" />
-        </div>
-      </div>
-
       {/* ─── BLOG — editorial layout ─── */}
       <section className="section on-light home-blog">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
-            <p className="sec-label on-light anim-up">04 — Blog</p>
+            <p className="sec-label on-light anim-up">03 — Blog</p>
             <h2 className="heading-xl anim-up">
               Pensamento <em className="gold-italic">estratégico</em> aplicado.
             </h2>

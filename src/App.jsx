@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import SplashScreen from './components/SplashScreen'
+import SmoothScroll from './components/SmoothScroll'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -22,12 +23,17 @@ export default function App() {
   const location = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
   }, [location.pathname])
 
   return (
     <>
       {!splashDone && <SplashScreen onComplete={handleSplashDone} />}
+      <SmoothScroll />
 <div className="noise-overlay" />
       {splashDone && (
         <>
