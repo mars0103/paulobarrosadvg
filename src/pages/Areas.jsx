@@ -1,0 +1,256 @@
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Marquee from '../components/Marquee'
+import { areas } from '../data/content'
+
+export default function Areas() {
+  const rootRef = useRef()
+  const [active, setActive] = useState(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.page-enter', {
+        opacity: 0, y: 36, stagger: 0.12,
+        duration: 0.9, ease: 'power3.out', delay: 0.1,
+      })
+
+      ScrollTrigger.create({
+        trigger: '.areas-intro',
+        start: 'top 78%',
+        onEnter: () => {
+          gsap.from('.areas-intro .anim-up', {
+            y: 28, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power2.out',
+          })
+        },
+        once: true,
+      })
+
+      ScrollTrigger.create({
+        trigger: '.areas-full-grid',
+        start: 'top 78%',
+        onEnter: () => {
+          gsap.from('.area-full-card', {
+            y: 40, opacity: 0, stagger: 0.08,
+            duration: 0.8, ease: 'power2.out',
+          })
+        },
+        once: true,
+      })
+
+      document.querySelectorAll('.area-full-card').forEach(card => {
+        const radial = card.querySelector('.card-radial')
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect()
+          card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%')
+          card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%')
+          if (radial) radial.style.opacity = '1'
+        })
+        card.addEventListener('mouseleave', () => {
+          if (radial) radial.style.opacity = '0'
+        })
+      })
+    }, rootRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <main ref={rootRef}>
+      {/* BANNER */}
+      <div className="page-banner on-dark">
+        <div className="page-banner-bg">
+          <div className="page-banner-glow" />
+          <span style={{
+            position: 'absolute', right: '6%', top: '30%',
+            fontSize: '160px', opacity: 0.025, color: 'var(--gold)',
+            fontFamily: 'serif', lineHeight: 1,
+          }}>♚</span>
+        </div>
+        <div className="page-banner-content">
+          <p className="sec-label on-dark page-enter">02 — Áreas de Atuação</p>
+          <h1 className="heading-display page-enter">
+            Cada movimento exige{' '}
+            <span className="gold-italic">estratégia.</span>
+          </h1>
+          <p className="page-enter" style={{
+            fontFamily: 'var(--font-body)', fontSize: '14px',
+            color: 'rgba(255,255,255,0.35)', lineHeight: 1.9,
+            maxWidth: '480px', marginTop: '20px',
+          }}>
+            Atuação exclusiva em direito empresarial. Cada área de prática é desenvolvida
+            com profundidade técnica e orientação estratégica para o negócio.
+          </p>
+          <div className="gold-line page-enter" style={{ marginTop: '28px' }} />
+        </div>
+      </div>
+
+      <Marquee />
+
+      {/* INTRO */}
+      <section className="section on-light areas-intro">
+        <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
+          <p className="sec-label on-light anim-up" style={{ justifyContent: 'center' }}>
+            Nossa atuação
+          </p>
+          <h2 className="heading-xl anim-up" style={{ marginBottom: '24px' }}>
+            Advocacia com <span className="gold-italic">foco cirúrgico.</span>
+          </h2>
+          <p className="body-text on-light anim-up" style={{ maxWidth: '560px', margin: '0 auto' }}>
+            A especialização não é uma limitação — é um diferencial. Ao concentrar nossa
+            atuação em direito empresarial, desenvolvemos profundidade técnica e visão
+            de negócio que advogados generalistas não conseguem oferecer.
+          </p>
+        </div>
+      </section>
+
+      {/* AREAS FULL GRID */}
+      <section className="section on-dark" style={{ paddingTop: '60px' }}>
+        <div className="areas-full-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '1px',
+          background: 'rgba(200,168,75,0.07)',
+        }}>
+          {areas.map((area, i) => (
+            <div
+              key={area.id}
+              className="area-full-card"
+              onClick={() => setActive(active === area.id ? null : area.id)}
+              data-cursor
+              style={{
+                background: active === area.id ? 'rgba(200,168,75,0.04)' : 'var(--black)',
+                border: '1px solid rgba(200,168,75,0.06)',
+                padding: '52px 44px',
+                cursor: 'pointer',
+                transition: 'background 0.4s',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Radial hover - managed via JS in useEffect */}
+              <div
+                className="card-radial"
+                style={{
+                  position: 'absolute', inset: 0,
+                  background: 'radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.07), transparent 55%)',
+                  opacity: 0, transition: 'opacity 0.4s',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px' }}>
+                <span style={{
+                  fontFamily: 'var(--font-serif)', fontSize: '52px', opacity: 0.14,
+                  color: 'var(--gold)', lineHeight: 1, display: 'block',
+                  transition: 'opacity 0.4s',
+                }}>
+                  {area.icon}
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-serif)', fontSize: '80px', fontWeight: 300,
+                  color: 'rgba(200,168,75,0.05)', lineHeight: 1,
+                }}>
+                  0{i + 1}
+                </span>
+              </div>
+
+              <h3 style={{
+                fontFamily: 'var(--font-serif)', fontSize: 'clamp(22px,2.2vw,30px)',
+                fontWeight: 400, color: 'var(--white)', marginBottom: '14px',
+                lineHeight: 1.2,
+              }}>
+                {area.title}
+              </h3>
+
+              <p style={{
+                fontFamily: 'var(--font-body)', fontSize: '13px',
+                lineHeight: 1.9, color: 'rgba(255,255,255,0.38)',
+                marginBottom: active === area.id ? '20px' : '0',
+                transition: 'margin 0.3s',
+              }}>
+                {area.short}
+              </p>
+
+              {active === area.id && (
+                <p style={{
+                  fontFamily: 'var(--font-body)', fontSize: '13px',
+                  lineHeight: 1.9, color: 'rgba(200,168,75,0.6)',
+                  borderTop: '1px solid rgba(200,168,75,0.12)',
+                  paddingTop: '18px',
+                  marginTop: '4px',
+                }}>
+                  {area.description}
+                </p>
+              )}
+
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0,
+                height: '2px', width: active === area.id ? '100%' : '0',
+                background: 'linear-gradient(90deg, var(--gold), rgba(200,168,75,0.3), transparent)',
+                transition: 'width 0.7s var(--ease-out)',
+              }} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* APPROACH */}
+      <section className="section on-dark scroll-section" style={{ paddingTop: '60px' }}>
+        <div style={{
+          background: 'rgba(200,168,75,0.03)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(200,168,75,0.1)',
+          padding: '60px 52px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '52px',
+          alignItems: 'center',
+        }}>
+          <div>
+            <h2 className="heading-lg" style={{ marginBottom: '20px' }}>
+              Por que atuação <span className="gold-italic">especializada</span>?
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 2, color: 'rgba(255,255,255,0.4)' }}>
+              A advocacia empresarial eficaz exige mais do que conhecimento jurídico.
+              Exige compreensão do negócio, do setor, das dinâmicas de mercado e das
+              consequências práticas de cada orientação.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {[
+              'Profundidade técnica em direito empresarial',
+              'Visão orientada ao resultado do negócio',
+              'Antecipação de riscos antes que se tornem crises',
+              'Relação de longo prazo com os clientes',
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <span style={{ color: 'var(--gold)', fontFamily: 'var(--font-serif)', fontSize: '20px', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>—</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.8 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta-section">
+        <div className="cta-glow"><div className="cta-glow-1" /><div className="cta-glow-2" /></div>
+        <div className="cta-content">
+          <p className="cta-small-title">Próximo passo</p>
+          <h2 className="heading-xl" style={{ color: 'var(--white)', marginBottom: '20px' }}>
+            Identifique a área certa para o <span className="gold-italic">seu caso.</span>
+          </h2>
+          <p className="cta-sub">
+            Agende uma consulta e avaliamos juntos a melhor estratégia para a sua situação.
+          </p>
+          <Link to="/contato" className="btn btn-gold" data-cursor>
+            Agendar consulta
+          </Link>
+        </div>
+      </section>
+    </main>
+  )
+}
