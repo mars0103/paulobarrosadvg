@@ -544,11 +544,11 @@ ul, ol { list-style: none; }
 }
 .hero-video-panel {
   position: absolute;
-  right: 6%;
+  right: 3%;
   top: 50%;
   transform: translateY(-50%);
-  width: 38%;
-  max-width: 580px;
+  width: 50%;
+  max-width: 760px;
   aspect-ratio: 16/9;
   border-radius: 14px;
   overflow: hidden;
@@ -572,7 +572,7 @@ ul, ol { list-style: none; }
 .marquee-strip.on-light {
   background: #C8A84B;
 }
-.on-light .marquee-item { color: rgba(255,255,255,0.8); }
+.on-light .marquee-item { color: #fff; }
 .on-light .marquee-dot { background: rgba(255,255,255,0.45); opacity: 1; }
 .marquee-track {
   display: flex;
@@ -591,7 +591,6 @@ ul, ol { list-style: none; }
   white-space: nowrap;
 }
 .on-dark .marquee-item { color: rgba(255,255,255,0.06); }
-.on-light .marquee-item { color: rgba(0,0,0,0.05); }
 .marquee-dot {
   width: 3px;
   height: 3px;
