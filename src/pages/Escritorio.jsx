@@ -131,6 +131,13 @@ export default function Escritorio() {
             scanlineFrequency={0}
             warpAmount={0.15}
           />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: '#C8A84B',
+            mixBlendMode: 'color',
+            opacity: 0.55,
+            pointerEvents: 'none',
+          }} />
           <div className="page-banner-glow" />
           <span style={{
             position: 'absolute', right: '5%', bottom: '10%',
