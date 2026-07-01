@@ -207,6 +207,7 @@ export default function Areas() {
                     height: '112%', width: 'auto', objectFit: 'contain',
                     transform: 'translateY(6%)',
                     filter: 'drop-shadow(0 -16px 40px rgba(200,168,75,0.18))',
+                    mixBlendMode: 'screen',
                     userSelect: 'none',
                   }}
                 />
