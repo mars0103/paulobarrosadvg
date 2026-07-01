@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Marquee from '../components/Marquee'
+import DarkVeil from '../components/DarkVeil'
 import { areas } from '../data/content'
 
 const chessImages = [
@@ -54,34 +54,30 @@ export default function Areas() {
 
   return (
     <main ref={rootRef}>
-      {/* BANNER */}
-      <div className="page-banner on-dark">
-        <div className="page-banner-bg">
-          <div className="page-banner-glow" />
-          <span style={{
-            position: 'absolute', right: '6%', top: '30%',
-            fontSize: '160px', opacity: 0.025, color: 'var(--gold)',
-            fontFamily: 'serif', lineHeight: 1,
-          }}>♚</span>
+      {/* HERO */}
+      <section className="page-hero">
+        <div className="page-hero-bg">
+          <DarkVeil hueShift={218} noiseIntensity={0.02} scanlineIntensity={0} speed={0.9} scanlineFrequency={0} warpAmount={0.15} />
+          <div className="page-hero-photo">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80" alt="" aria-hidden />
+          </div>
+          <div className="page-hero-overlay" />
         </div>
-        <div className="page-banner-content">
+        <div className="page-hero-content">
           <h1 className="heading-display page-enter">
             Cada movimento exige{' '}
-            <span className="gold-italic">estratégia.</span>
+            <em className="gold-italic">estratégia.</em>
           </h1>
           <p className="page-enter" style={{
-            fontFamily: 'var(--font-body)', fontSize: '14px',
-            color: 'rgba(255,255,255,0.35)', lineHeight: 1.9,
-            maxWidth: '480px', marginTop: '20px',
+            fontFamily: 'var(--font-body)', fontSize: '15px',
+            color: 'rgba(255,255,255,0.38)', lineHeight: 1.9,
+            maxWidth: '500px', marginTop: '24px',
           }}>
             Atuação exclusiva em direito empresarial. Cada área de prática é desenvolvida
             com profundidade técnica e orientação estratégica para o negócio.
           </p>
-          <div className="gold-line page-enter" style={{ marginTop: '28px' }} />
         </div>
-      </div>
-
-      <Marquee />
+      </section>
 
       {/* INTRO */}
       <section className="section on-light areas-intro">

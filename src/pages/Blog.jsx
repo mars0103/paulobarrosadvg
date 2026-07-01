@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Marquee from '../components/Marquee'
+import DarkVeil from '../components/DarkVeil'
 import { blogPosts } from '../data/content'
 
 const categories = ['Todos', 'Governança', 'Reestruturação', 'Patrimônio']
@@ -47,29 +47,30 @@ export default function Blog() {
 
   return (
     <main ref={rootRef}>
-      {/* BANNER */}
-      <div className="page-banner on-dark">
-        <div className="page-banner-bg">
-          <div className="page-banner-glow" />
+      {/* HERO */}
+      <section className="page-hero">
+        <div className="page-hero-bg">
+          <DarkVeil hueShift={218} noiseIntensity={0.02} scanlineIntensity={0} speed={0.9} scanlineFrequency={0} warpAmount={0.15} />
+          <div className="page-hero-photo">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1920&q=80" alt="" aria-hidden />
+          </div>
+          <div className="page-hero-overlay" />
         </div>
-        <div className="page-banner-content">
+        <div className="page-hero-content">
           <h1 className="heading-display page-enter">
             Pensamento{' '}
-            <span className="gold-italic">estratégico</span>{' '}
+            <em className="gold-italic">estratégico</em>{' '}
             aplicado.
           </h1>
           <p className="page-enter" style={{
-            fontFamily: 'var(--font-body)', fontSize: '14px',
-            color: 'rgba(255,255,255,0.35)', lineHeight: 1.9,
-            maxWidth: '440px', marginTop: '20px',
+            fontFamily: 'var(--font-body)', fontSize: '15px',
+            color: 'rgba(255,255,255,0.38)', lineHeight: 1.9,
+            maxWidth: '480px', marginTop: '24px',
           }}>
             Análises e orientações para empresários que tomam decisões em cenários de complexidade.
           </p>
-          <div className="gold-line page-enter" style={{ marginTop: '28px' }} />
         </div>
-      </div>
-
-      <Marquee />
+      </section>
 
       {/* BLOG CONTENT */}
       <section className="section on-dark">

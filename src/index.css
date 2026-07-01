@@ -1759,6 +1759,48 @@ ul, ol { list-style: none; }
   border-bottom: 1px solid rgba(200,168,75,0.08);
 }
 
+/* ===== PAGE HERO (Areas, Blog) ===== */
+.page-hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  padding: 140px var(--site-pad) 100px;
+  overflow: hidden;
+}
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero-photo {
+  position: absolute;
+  inset: 0;
+}
+.page-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(8,8,8,0.95) 0%,
+    rgba(8,8,8,0.72) 60%,
+    rgba(8,8,8,0.50) 100%
+  );
+}
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--site-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* ===== CONTACT HERO ===== */
 .contact-hero {
   position: relative;
