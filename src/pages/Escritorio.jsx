@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Marquee from '../components/Marquee'
-import DarkVeil from '../components/DarkVeil'
 import { stats } from '../data/content'
 
 export default function Escritorio() {
@@ -120,48 +119,43 @@ export default function Escritorio() {
 
   return (
     <main ref={rootRef}>
-      {/* ─── BANNER ─── */}
-      <div className="page-banner on-dark">
-        <div className="page-banner-bg">
-          <DarkVeil
-            hueShift={218}
-            noiseIntensity={0.02}
-            scanlineIntensity={0}
-            speed={0.9}
-            scanlineFrequency={0}
-            warpAmount={0.15}
-          />
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: '#C8A84B',
-            mixBlendMode: 'color',
-            opacity: 0.55,
-            pointerEvents: 'none',
-          }} />
-          <div className="page-banner-glow" />
-          <span style={{
-            position: 'absolute', right: '5%', bottom: '10%',
-            fontSize: '220px', opacity: 0.018, color: 'var(--gold)',
-            fontFamily: 'var(--font-serif)', lineHeight: 1, userSelect: 'none',
-          }}>♚</span>
-        </div>
-        <div className="page-banner-content">
+      {/* ─── HERO ─── */}
+      <section className="escritorio-hero on-dark">
+        {/* Text block */}
+        <div className="escritorio-hero-text">
           <h1 className="heading-display page-enter">
             Advocacia como{' '}
             <em className="gold-italic">parceria</em>{' '}
             estratégica.
           </h1>
           <p className="page-enter" style={{
-            fontFamily: 'var(--font-body)', fontSize: '14px',
-            color: 'rgba(255,255,255,0.32)', lineHeight: 1.9,
-            maxWidth: '480px', marginTop: '20px',
+            fontFamily: 'var(--font-body)', fontSize: '15px',
+            color: 'rgba(255,255,255,0.38)', lineHeight: 1.9,
+            maxWidth: '560px', marginTop: '20px',
           }}>
             Não somos apenas assessores jurídicos. Somos parceiros de decisão
             para empresários que constroem em cenários de complexidade.
           </p>
-          <div className="gold-line page-enter" style={{ marginTop: '28px' }} />
         </div>
-      </div>
+
+        {/* Video */}
+        <div className="escritorio-hero-video">
+          <video
+            src="/heroescritorio.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        </div>
+
+        {/* CTA */}
+        <div className="escritorio-hero-cta page-enter">
+          <Link to="/contato" className="btn btn-gold">
+            Falar com o escritório
+          </Link>
+        </div>
+      </section>
 
       <Marquee theme="light" />
 
