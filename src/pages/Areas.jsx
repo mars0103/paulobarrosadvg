@@ -65,7 +65,6 @@ export default function Areas() {
           }}>♚</span>
         </div>
         <div className="page-banner-content">
-          <p className="sec-label on-dark page-enter">02 — Áreas de Atuação</p>
           <h1 className="heading-display page-enter">
             Cada movimento exige{' '}
             <span className="gold-italic">estratégia.</span>

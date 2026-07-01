@@ -53,7 +53,6 @@ export default function Blog() {
           <div className="page-banner-glow" />
         </div>
         <div className="page-banner-content">
-          <p className="sec-label on-dark page-enter">04 — Blog</p>
           <h1 className="heading-display page-enter">
             Pensamento{' '}
             <span className="gold-italic">estratégico</span>{' '}
