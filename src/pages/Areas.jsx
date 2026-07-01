@@ -47,18 +47,6 @@ export default function Areas() {
         once: true,
       })
 
-      document.querySelectorAll('.area-full-card').forEach(card => {
-        const radial = card.querySelector('.card-radial')
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect()
-          card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%')
-          card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%')
-          if (radial) radial.style.opacity = '1'
-        })
-        card.addEventListener('mouseleave', () => {
-          if (radial) radial.style.opacity = '0'
-        })
-      })
     }, rootRef)
 
     return () => ctx.revert()
@@ -135,16 +123,6 @@ export default function Areas() {
                 minHeight: '380px',
               }}
             >
-              {/* Radial hover */}
-              <div
-                className="card-radial"
-                style={{
-                  position: 'absolute', inset: 0,
-                  background: 'radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.08), transparent 55%)',
-                  opacity: 0, transition: 'opacity 0.4s',
-                  pointerEvents: 'none', zIndex: 2,
-                }}
-              />
 
               {/* Content */}
               <div style={{

@@ -1933,7 +1933,16 @@ main {
 
 /* ===== AREA CARDS — ADDITIONAL HOVER ===== */
 .area-card:hover .area-card-icon { color: var(--gold); }
-.area-full-card:hover { background: rgba(200,168,75,0.03) !important; }
+.area-full-card {
+  transition: box-shadow 0.45s ease;
+}
+.area-full-card:hover {
+  box-shadow:
+    inset 0 0 0 1px rgba(200,168,75,0.35),
+    inset 0 0 22px rgba(200,168,75,0.06),
+    inset 1px 0 18px rgba(200,168,75,0.05),
+    inset -1px 0 18px rgba(200,168,75,0.05);
+}
 
 /* ===== BLOG CARD HOVER ===== */
 .blog-post-card:hover { border-color: rgba(200,168,75,0.12) !important; transform: translateY(-4px); }
