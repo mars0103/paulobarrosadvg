@@ -1,13 +1,21 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Marquee from '../components/Marquee'
 import { areas } from '../data/content'
 
+const chessImages = [
+  '/xadrez/torre.png',
+  '/xadrez/cavalo.png',
+  '/xadrez/rainha.png',
+  '/xadrez/rei.png',
+  '/xadrez/peão.png',
+  '/xadrez/bispo.png',
+]
+
 export default function Areas() {
   const rootRef = useRef()
-  const [active, setActive] = useState(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -106,7 +114,7 @@ export default function Areas() {
       </section>
 
       {/* AREAS FULL GRID */}
-      <section className="section on-dark" style={{ paddingTop: '60px' }}>
+      <section className="section on-dark" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
         <div className="areas-full-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
@@ -117,80 +125,92 @@ export default function Areas() {
             <div
               key={area.id}
               className="area-full-card"
-              onClick={() => setActive(active === area.id ? null : area.id)}
               data-cursor
               style={{
-                background: active === area.id ? 'rgba(200,168,75,0.04)' : 'var(--black)',
-                border: '1px solid rgba(200,168,75,0.06)',
-                padding: '52px 44px',
-                cursor: 'pointer',
-                transition: 'background 0.4s',
+                background: 'var(--black)',
                 position: 'relative',
                 overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'stretch',
+                minHeight: '380px',
               }}
             >
-              {/* Radial hover - managed via JS in useEffect */}
+              {/* Radial hover */}
               <div
                 className="card-radial"
                 style={{
                   position: 'absolute', inset: 0,
-                  background: 'radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.07), transparent 55%)',
+                  background: 'radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.08), transparent 55%)',
                   opacity: 0, transition: 'opacity 0.4s',
-                  pointerEvents: 'none',
+                  pointerEvents: 'none', zIndex: 2,
                 }}
               />
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px' }}>
-                <span style={{
-                  fontFamily: 'var(--font-serif)', fontSize: '52px', opacity: 0.14,
-                  color: 'var(--gold)', lineHeight: 1, display: 'block',
-                  transition: 'opacity 0.4s',
+              {/* Content */}
+              <div style={{
+                flex: '1 1 55%', padding: '44px 40px',
+                display: 'flex', flexDirection: 'column',
+                justifyContent: 'space-between', position: 'relative', zIndex: 1,
+              }}>
+                <div>
+                  <span style={{
+                    fontFamily: 'var(--font-body)', fontSize: '10px',
+                    letterSpacing: '3px', textTransform: 'uppercase',
+                    color: 'rgba(200,168,75,0.5)', display: 'block', marginBottom: '28px',
+                  }}>
+                    0{i + 1}
+                  </span>
+                  <h3 style={{
+                    fontFamily: 'var(--font-serif)', fontSize: 'clamp(20px,1.8vw,26px)',
+                    fontWeight: 400, lineHeight: 1.25, marginBottom: '16px',
+                  }}>
+                    <em style={{ color: 'var(--gold)', fontStyle: 'italic', display: 'block' }}>
+                      {area.title.split(' ').slice(0, 1).join(' ')}
+                    </em>
+                    <span style={{ color: 'var(--white)' }}>
+                      {area.title.split(' ').slice(1).join(' ')}
+                    </span>
+                  </h3>
+                  <p style={{
+                    fontFamily: 'var(--font-body)', fontSize: '13px',
+                    lineHeight: 1.9, color: 'rgba(255,255,255,0.38)',
+                    maxWidth: '260px',
+                  }}>
+                    {area.short}
+                  </p>
+                </div>
+                <Link to="/contato" style={{
+                  fontFamily: 'var(--font-body)', fontSize: '10px',
+                  letterSpacing: '2.5px', textTransform: 'uppercase',
+                  color: 'rgba(200,168,75,0.55)',
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  marginTop: '28px',
                 }}>
-                  {area.icon}
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-serif)', fontSize: '80px', fontWeight: 300,
-                  color: 'rgba(200,168,75,0.05)', lineHeight: 1,
-                }}>
-                  0{i + 1}
-                </span>
+                  Consultar
+                  <svg width="12" height="8" viewBox="0 0 14 8" fill="none">
+                    <path d="M1 4H13M13 4L10 1M13 4L10 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                  </svg>
+                </Link>
               </div>
 
-              <h3 style={{
-                fontFamily: 'var(--font-serif)', fontSize: 'clamp(22px,2.2vw,30px)',
-                fontWeight: 400, color: 'var(--white)', marginBottom: '14px',
-                lineHeight: 1.2,
-              }}>
-                {area.title}
-              </h3>
-
-              <p style={{
-                fontFamily: 'var(--font-body)', fontSize: '13px',
-                lineHeight: 1.9, color: 'rgba(255,255,255,0.38)',
-                marginBottom: active === area.id ? '20px' : '0',
-                transition: 'margin 0.3s',
-              }}>
-                {area.short}
-              </p>
-
-              {active === area.id && (
-                <p style={{
-                  fontFamily: 'var(--font-body)', fontSize: '13px',
-                  lineHeight: 1.9, color: 'rgba(200,168,75,0.6)',
-                  borderTop: '1px solid rgba(200,168,75,0.12)',
-                  paddingTop: '18px',
-                  marginTop: '4px',
-                }}>
-                  {area.description}
-                </p>
-              )}
-
+              {/* Chess piece image */}
               <div style={{
-                position: 'absolute', bottom: 0, left: 0,
-                height: '2px', width: active === area.id ? '100%' : '0',
-                background: 'linear-gradient(90deg, var(--gold), rgba(200,168,75,0.3), transparent)',
-                transition: 'width 0.7s var(--ease-out)',
-              }} />
+                flex: '0 0 42%', position: 'relative',
+                display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+                overflow: 'hidden',
+              }}>
+                <img
+                  src={chessImages[i]}
+                  alt=""
+                  aria-hidden
+                  style={{
+                    height: '112%', width: 'auto', objectFit: 'contain',
+                    transform: 'translateY(6%)',
+                    filter: 'drop-shadow(0 -16px 40px rgba(200,168,75,0.18))',
+                    userSelect: 'none',
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>
