@@ -2198,53 +2198,7 @@ main {
 
 /* ===== AREA CARDS — ADDITIONAL HOVER ===== */
 .area-card:hover .area-card-icon { color: var(--gold); }
-
-/* ===== AREAS HORIZONTAL SCROLL ===== */
-.areas-hscroll-section {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--black);
-  display: flex;
-  flex-direction: column;
-}
-.areas-hscroll-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px var(--site-pad) 24px;
-  flex-shrink: 0;
-  border-bottom: 1px solid rgba(200,168,75,0.06);
-}
-.areas-hscroll-track {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  will-change: transform;
-}
-.areas-hscroll-progress {
-  height: 1px;
-  background: rgba(200,168,75,0.08);
-  flex-shrink: 0;
-}
-.areas-hscroll-progress-fill {
-  height: 100%;
-  background: var(--gold);
-  width: 0%;
-  transition: width 0.05s linear;
-}
-
-/* Card */
 .area-full-card {
-  flex: 0 0 clamp(380px, 40vw, 560px);
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  background: var(--black);
-  border-right: 1px solid rgba(200,168,75,0.07);
-  position: relative;
-  overflow: hidden;
   transition: box-shadow 0.45s ease;
 }
 .area-full-card:hover {
@@ -2253,76 +2207,6 @@ main {
     inset 0 0 22px rgba(200,168,75,0.06),
     inset 1px 0 18px rgba(200,168,75,0.05),
     inset -1px 0 18px rgba(200,168,75,0.05);
-}
-.area-card-content {
-  flex: 1 1 55%;
-  padding: 44px 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  z-index: 1;
-}
-.area-card-num {
-  font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(200,168,75,0.5);
-  display: block;
-  margin-bottom: 28px;
-}
-.area-card-title {
-  font-family: var(--font-serif);
-  font-size: clamp(22px, 2vw, 30px);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 18px;
-}
-.area-card-title em {
-  color: var(--gold);
-  font-style: italic;
-  display: block;
-}
-.area-card-title span {
-  color: var(--white);
-}
-.area-card-desc {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.9;
-  color: rgba(255,255,255,0.38);
-  max-width: 240px;
-}
-.area-card-link {
-  font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: rgba(200,168,75,0.55);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 28px;
-  transition: color 0.3s;
-}
-.area-card-link:hover { color: var(--gold); }
-.area-card-piece {
-  flex: 0 0 42%;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: hidden;
-}
-.area-card-piece img {
-  height: 112%;
-  width: auto;
-  object-fit: contain;
-  transform: translateY(6%);
-  filter: drop-shadow(0 -16px 40px rgba(200,168,75,0.18));
-  mix-blend-mode: screen;
-  user-select: none;
 }
 
 /* ===== BLOG CARD HOVER ===== */
