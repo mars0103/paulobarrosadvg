@@ -1839,8 +1839,8 @@ ul, ol { list-style: none; }
   width: 100%;
   height: auto;
   display: block;
-  opacity: 0.18;
-  filter: invert(1);
+  opacity: 1;
+  filter: sepia(1) saturate(0.8) brightness(0.9);
 }
 
 /* ===== LIGHT NAV (Areas page) ===== */
