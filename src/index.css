@@ -1828,15 +1828,45 @@ ul, ol { list-style: none; }
 .areas-hero-watermark {
   position: relative;
   z-index: 1;
-  font-family: var(--font-serif);
-  font-size: clamp(72px, 11vw, 160px);
-  color: rgba(200,168,75,0.15);
-  line-height: 1;
-  user-select: none;
-  white-space: nowrap;
-  overflow: hidden;
-  letter-spacing: -3px;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: auto;
+  line-height: 0;
+  overflow: hidden;
+}
+.areas-hero-watermark img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.18;
+  filter: invert(1);
+}
+
+/* ===== LIGHT NAV (Areas page) ===== */
+[data-light-nav] .navbar-link {
+  color: rgba(8,8,8,0.45);
+}
+[data-light-nav] .navbar-link:hover,
+[data-light-nav] .navbar-link.active {
+  color: var(--black);
+}
+[data-light-nav] .navbar-link::after {
+  background: var(--black);
+}
+[data-light-nav] .navbar-cta {
+  color: var(--black);
+  border-color: rgba(8,8,8,0.25);
+}
+[data-light-nav] .navbar-logo-full {
+  filter: invert(1);
+}
+[data-light-nav] .navbar-hamburger span {
+  background: var(--black);
+}
+[data-light-nav] .navbar.scrolled {
+  background: rgba(245,244,240,0.94);
+  border-bottom-color: rgba(8,8,8,0.08);
 }
 
 /* ===== PAGE HERO (Areas, Blog) ===== */

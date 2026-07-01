@@ -18,6 +18,11 @@ export default function Areas() {
   const rootRef = useRef()
 
   useEffect(() => {
+    document.body.setAttribute('data-light-nav', '1')
+    return () => document.body.removeAttribute('data-light-nav')
+  }, [])
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.page-enter', {
         opacity: 0, y: 36, stagger: 0.12,
@@ -49,10 +54,6 @@ export default function Areas() {
           <Threads color={[0, 0, 0]} amplitude={1} distance={0} enableMouseInteraction />
         </div>
 
-        <div className="areas-hero-logo">
-          <img src="/logo/logodafaixasvg.svg" alt="Paulo Barros Advogados" />
-        </div>
-
         <div className="areas-hero-inner">
           <div className="areas-hero-left">
             <h1 className="heading-display page-enter" style={{ color: 'var(--black)' }}>
@@ -76,7 +77,9 @@ export default function Areas() {
           </div>
         </div>
 
-        <div className="areas-hero-watermark" aria-hidden>Paulo Barros</div>
+        <div className="areas-hero-watermark" aria-hidden>
+          <img src="/logo/logodafaixasvg.svg" alt="" />
+        </div>
       </section>
 
       {/* AREAS FULL GRID */}
