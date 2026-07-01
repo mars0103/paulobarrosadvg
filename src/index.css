@@ -1759,6 +1759,86 @@ ul, ol { list-style: none; }
   border-bottom: 1px solid rgba(200,168,75,0.08);
 }
 
+/* ===== AREAS HERO LIGHT ===== */
+.areas-hero {
+  position: relative;
+  min-height: 90vh;
+  background: #F5F4F0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px var(--site-pad) 0;
+}
+.areas-hero-threads {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.14;
+}
+.areas-hero-logo {
+  position: absolute;
+  top: 100px;
+  left: var(--site-pad);
+  z-index: 2;
+}
+.areas-hero-logo img {
+  height: 32px;
+  width: auto;
+  filter: invert(1);
+}
+.areas-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding-bottom: 60px;
+}
+.areas-hero-pieces {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 460px;
+}
+.areas-hero-piece-main {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  position: relative;
+  z-index: 2;
+}
+.areas-hero-piece-back {
+  height: 75%;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.7;
+}
+.areas-hero-watermark {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: clamp(72px, 11vw, 160px);
+  color: rgba(200,168,75,0.15);
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: -3px;
+  margin-top: auto;
+}
+
 /* ===== PAGE HERO (Areas, Blog) ===== */
 .page-hero {
   position: relative;

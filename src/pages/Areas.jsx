@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import DarkVeil from '../components/DarkVeil'
+import Threads from '../components/Threads'
 import { areas } from '../data/content'
 
 const chessImages = [
@@ -25,17 +25,6 @@ export default function Areas() {
       })
 
       ScrollTrigger.create({
-        trigger: '.areas-intro',
-        start: 'top 78%',
-        onEnter: () => {
-          gsap.from('.areas-intro .anim-up', {
-            y: 28, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power2.out',
-          })
-        },
-        once: true,
-      })
-
-      ScrollTrigger.create({
         trigger: '.areas-full-grid',
         start: 'top 78%',
         onEnter: () => {
@@ -55,45 +44,39 @@ export default function Areas() {
   return (
     <main ref={rootRef}>
       {/* HERO */}
-      <section className="page-hero">
-        <div className="page-hero-bg">
-          <DarkVeil hueShift={218} noiseIntensity={0.02} scanlineIntensity={0} speed={0.9} scanlineFrequency={0} warpAmount={0.15} />
-          <div className="page-hero-photo">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80" alt="" aria-hidden />
-          </div>
-          <div className="page-hero-overlay" />
+      <section className="areas-hero">
+        <div className="areas-hero-threads">
+          <Threads color={[0, 0, 0]} amplitude={1} distance={0} enableMouseInteraction />
         </div>
-        <div className="page-hero-content">
-          <h1 className="heading-display page-enter">
-            Cada movimento exige{' '}
-            <em className="gold-italic">estratégia.</em>
-          </h1>
-          <p className="page-enter" style={{
-            fontFamily: 'var(--font-body)', fontSize: '15px',
-            color: 'rgba(255,255,255,0.38)', lineHeight: 1.9,
-            maxWidth: '500px', marginTop: '24px',
-          }}>
-            Atuação exclusiva em direito empresarial. Cada área de prática é desenvolvida
-            com profundidade técnica e orientação estratégica para o negócio.
-          </p>
-        </div>
-      </section>
 
-      {/* INTRO */}
-      <section className="section on-light areas-intro">
-        <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
-          <p className="sec-label on-light anim-up" style={{ justifyContent: 'center' }}>
-            Nossa atuação
-          </p>
-          <h2 className="heading-xl anim-up" style={{ marginBottom: '24px' }}>
-            Advocacia com <span className="gold-italic">foco cirúrgico.</span>
-          </h2>
-          <p className="body-text on-light anim-up" style={{ maxWidth: '560px', margin: '0 auto' }}>
-            A especialização não é uma limitação — é um diferencial. Ao concentrar nossa
-            atuação em direito empresarial, desenvolvemos profundidade técnica e visão
-            de negócio que advogados generalistas não conseguem oferecer.
-          </p>
+        <div className="areas-hero-logo">
+          <img src="/logo/logodafaixasvg.svg" alt="Paulo Barros Advogados" />
         </div>
+
+        <div className="areas-hero-inner">
+          <div className="areas-hero-left">
+            <h1 className="heading-display page-enter" style={{ color: 'var(--black)' }}>
+              Advocacia com{' '}
+              <em className="gold-italic">foco cirúrgico.</em>
+            </h1>
+            <p className="page-enter" style={{
+              fontFamily: 'var(--font-body)', fontSize: '15px',
+              color: 'rgba(8,8,8,0.55)', lineHeight: 1.9,
+              maxWidth: '440px', marginTop: '24px',
+            }}>
+              A especialização não é uma limitação — é um diferencial. Ao concentrar
+              nossa atuação em direito empresarial, desenvolvemos profundidade técnica
+              e visão de negócio que advogados generalistas não conseguem oferecer.
+            </p>
+          </div>
+
+          <div className="areas-hero-pieces">
+            <img src="/xadrez/cavalo.png" className="areas-hero-piece-main" alt="" aria-hidden />
+            <img src="/xadrez/torre.png" className="areas-hero-piece-back" alt="" aria-hidden />
+          </div>
+        </div>
+
+        <div className="areas-hero-watermark" aria-hidden>Paulo Barros</div>
       </section>
 
       {/* AREAS FULL GRID */}
