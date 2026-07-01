@@ -121,6 +121,9 @@ export default function Escritorio() {
     <main ref={rootRef}>
       {/* ─── HERO ─── */}
       <section className="escritorio-hero on-dark">
+        {/* Grid background */}
+        <div className="escritorio-hero-grid" aria-hidden />
+
         {/* Text block */}
         <div className="escritorio-hero-text">
           <h1 className="heading-display page-enter">
